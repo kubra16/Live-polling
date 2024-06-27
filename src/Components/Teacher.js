@@ -6,7 +6,7 @@ import PollResults from "./pollResults";
 import TeacherNavbar from "./TeacherNavbar";
 import Chat from "./Chat";
 import style from "./Teacher.module.css";
-import Polls from "./Polls";
+import Polls from "./PollsHistory";
 
 const socket = io(process.env.REACT_APP_API_URL);
 

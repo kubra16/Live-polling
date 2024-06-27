@@ -5,7 +5,7 @@ import styles from "./pollResults.module.css";
 
 const BASE_URL = process.env.REACT_APP_API_URL;
 
-const Polls = () => {
+const PollsHistory = () => {
   const [previousPolls, setPreviousPolls] = useState([]);
 
   useEffect(() => {
@@ -42,4 +42,4 @@ const Polls = () => {
   );
 };
 
-export default Polls;
+export default PollsHistory;

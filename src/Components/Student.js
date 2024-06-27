@@ -6,7 +6,7 @@ import PollResults from "./pollResults";
 import StudentNavbar from "./StudentNavbar";
 import Chat from "./Chat";
 import styles from "./Student.module.css"; // Import CSS module
-import Polls from "./Polls";
+import PollsHistory from "./PollsHistory";
 
 const socket = io(process.env.REACT_APP_API_URL);
 
@@ -148,7 +148,7 @@ const Student = () => {
             student={chat}
           />
         )}
-        {currentSection === "PollsHistory" && <Polls />}
+        {currentSection === "PollsHistory" && <PollsHistory />}
       </div>
     </div>
   );
