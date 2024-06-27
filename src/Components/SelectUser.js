@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setUser } from "../redux/actions";
+import style from "./SelectUSer.module.css";
+
 const SelectUser = () => {
   const navigation = useNavigate();
   const dispatch = useDispatch();
@@ -25,20 +27,48 @@ const SelectUser = () => {
       alert("Please enter your name");
     }
   };
+
+  const handleBack = () => {
+    setRole("");
+    setName("");
+  };
+
   return (
-    <div>
-      <h1>Select USer type</h1>
-      <button onClick={() => handleSelectUSer("teacher")}>Teacher</button>
-      <button onClick={() => handleSelectUSer("student")}>Student</button>
-      {role === "student" && (
+    <div className={style.userContainer}>
+      {role === "" ? (
         <div>
+          <div className={style.header}>Select User type to join the poll</div>
+          <div className={style.buttonRow}>
+            <button
+              className={style.button}
+              onClick={() => handleSelectUSer("teacher")}
+            >
+              Teacher
+            </button>
+            <button
+              className={style.button}
+              onClick={() => handleSelectUSer("student")}
+            >
+              Student
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className={style.formContainer}>
+          <div className={style.header}>Hello, Please enter your name</div>
           <input
             type="text"
             placeholder="Enter your name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            className={style.inputField}
           />
-          <button onClick={handleSubmit}>Submit</button>
+          <button onClick={handleSubmit} className={style.submitButton}>
+            Submit
+          </button>
+          <button onClick={handleBack} className={style.backButton}>
+            Back
+          </button>
         </div>
       )}
     </div>

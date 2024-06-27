@@ -1,0 +1,73 @@
+/* Student.module.css */
+
+.studentContainer {
+    background-color: #1e1e1e;
+    color: #c3b3ee;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 80%;
+    margin: 2rem auto;
+}
+
+.header {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.waitingMessage {
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 2rem 0;
+}
+
+.questionContainer {
+    text-align: center;
+}
+
+.questionText {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.optionsContainer {
+    margin: 1rem 0;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0;
+}
+
+.option input[type="checkbox"] {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+}
+
+.timer {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+}
+
+.submitButton {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.submitButton:hover {
+    background-color: #45a049;
+}
+
+.kickedMessage {
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 2rem 0;
+    color: white;
+}

@@ -1,0 +1,78 @@
+.userContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.header {
+    font-size: 2rem;
+    color: #C3B3EE;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 700;
+}
+
+.buttonRow {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.button {
+    padding: 1rem;
+    background-color: #C3B3EE;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #282828;
+    margin: 1rem;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    
+}
+
+.inputField {
+    width: 20rem;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.submitButton,
+.backButton {
+    width: 10rem;
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.submitButton {
+    background-color: #4caf50;
+}
+
+.submitButton:hover {
+    background-color: #45a049;
+}
+
+.backButton {
+    background-color: #f44336;
+}
+
+.backButton:hover {
+    background-color: #d32f2f;
+}

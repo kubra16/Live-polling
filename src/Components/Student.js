@@ -5,18 +5,19 @@ import { io } from "socket.io-client";
 import PollResults from "./pollResults";
 import StudentNavbar from "./StudentNavbar";
 import Chat from "./Chat";
+import styles from "./Student.module.css"; // Import CSS module
 
 const socket = io("http://localhost:5000");
 
 const Student = () => {
-  const [answer, setAnswer] = useState("");
+  const [selectedAnswers, setSelectedAnswers] = useState([]);
   const [hasAnswered, setHasAnswered] = useState(false);
   const [currentSection, setCurrentSection] = useState("polls");
   const [waiting, setWaiting] = useState(true);
   const [kicked, setKicked] = useState(false);
   const question = useSelector((state) => state.currentPoll);
   const userName = useSelector((state) => state.userName);
-  const [chat, setChat] = useState([]); // State to hold online users
+  const [chat, setChat] = useState([]);
   const dispatch = useDispatch();
   const [timer, setTimer] = useState(60);
 
@@ -69,17 +70,28 @@ const Student = () => {
     }
   }, [question]);
 
+  const handleCheckboxChange = (option) => {
+    setSelectedAnswers((prevAnswers) =>
+      prevAnswers.includes(option)
+        ? prevAnswers.filter((answer) => answer !== option)
+        : [...prevAnswers, option]
+    );
+  };
+
   const handleSubmit = () => {
-    if (!kicked && answer) {
-      console.log("Submitting answer:", answer);
-      socket.emit("submitAnswer", { studentId: userName, answer });
+    if (!kicked && selectedAnswers.length > 0) {
+      console.log("Submitting answer:", selectedAnswers[0]);
+      socket.emit("submitAnswer", {
+        studentId: userName,
+        answer: selectedAnswers[0],
+      });
       setHasAnswered(true);
     }
   };
 
   if (kicked) {
     return (
-      <div>
+      <div className={styles.kickedMessage}>
         <h2>You have been kicked out by the teacher.</h2>
       </div>
     );
@@ -88,41 +100,54 @@ const Student = () => {
   return (
     <div>
       <StudentNavbar setCurrentSection={setCurrentSection} />
-      {currentSection === "polls" && (
-        <div>
-          <h1>Student</h1>
-          {waiting && (
-            <div>
-              <h2>Waiting for the poll to start...</h2>
-            </div>
-          )}
-          {!waiting && !hasAnswered && timer > 0 && question && !kicked && (
-            <div>
-              <h2>{question.text}</h2>
-              <div>
-                {timer}
-                {question.options.map((option, index) => (
-                  <div key={index}>
-                    <input
-                      type="radio"
-                      id={option}
-                      name="answer"
-                      value={option}
-                      onChange={(e) => setAnswer(e.target.value)}
-                    />
-                    <label htmlFor={option}>{option}</label>
-                  </div>
-                ))}
-                <button onClick={handleSubmit}>Submit</button>
+      <div className={styles.studentContainer}>
+        {currentSection === "polls" && (
+          <div>
+            <h1 className={styles.header}>Student</h1>
+            {waiting && (
+              <div className={styles.waitingMessage}>
+                <h2>Waiting for the poll to start...</h2>
               </div>
-            </div>
-          )}
-          {!waiting && (hasAnswered || timer === 0) && <PollResults />}
-        </div>
-      )}
-      {currentSection === "chat" && (
-        <Chat userName={userName} role="student" student={chat} />
-      )}
+            )}
+            {!waiting && !hasAnswered && timer > 0 && question && !kicked && (
+              <div className={styles.questionContainer}>
+                <h2 className={styles.questionText}>{question.text}</h2>
+                <div className={styles.timer}>{timer}</div>
+                <div className={styles.optionsContainer}>
+                  {question.options.map((option, index) => (
+                    <div key={index} className={styles.option}>
+                      <input
+                        type="checkbox"
+                        id={option}
+                        name="answer"
+                        value={option}
+                        checked={selectedAnswers.includes(option)}
+                        onChange={() => handleCheckboxChange(option)}
+                      />
+                      <label htmlFor={option}>{option}</label>
+                    </div>
+                  ))}
+                  <button
+                    className={styles.submitButton}
+                    onClick={handleSubmit}
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            )}
+            {!waiting && (hasAnswered || timer === 0) && <PollResults />}
+          </div>
+        )}
+        {currentSection === "chat" && (
+          <Chat
+            socket={socket}
+            userName={userName}
+            role="student"
+            student={chat}
+          />
+        )}
+      </div>
     </div>
   );
 };

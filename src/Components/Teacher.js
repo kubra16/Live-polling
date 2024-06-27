@@ -5,6 +5,8 @@ import { setPoll, setResults } from "../redux/actions";
 import PollResults from "./pollResults";
 import TeacherNavbar from "./TeacherNavbar";
 import Chat from "./Chat";
+import style from "./Teacher.module.css";
+import Polls from "./Polls";
 
 const socket = io("http://localhost:5000");
 
@@ -60,16 +62,17 @@ const Teacher = () => {
     }
   };
 
-  const handleKickStudent = (studentId) => {
-    socket.emit("kickStudent", studentId);
+  const handleKickStudent = (studentName) => {
+    socket.emit("kickStudent", studentName);
   };
 
   return (
-    <div>
+    <div className={style.teacherContainer}>
       <TeacherNavbar setCurrentSection={setCurrentSection} />
       {currentSection === "polls" && (
         <div>
           <input
+            className={style.input}
             type="text"
             placeholder="Ask a question"
             value={question}
@@ -78,18 +81,23 @@ const Teacher = () => {
           {options.map((option, index) => (
             <div key={index}>
               <input
+                className={style.options}
                 type="text"
                 value={option}
+                placeholder="Add an option"
                 onChange={(e) => handleOptionChange(index, e.target.value)}
               />
             </div>
           ))}
-          <button onClick={handleAddOption}>Add an option</button>
+          <button className={style.submitButton} onClick={handleAddOption}>
+            Add an option
+          </button>
           <div>
-            <label>Correct option:</label>
+            <label className={style.label}>Correct option:</label>
             <select
               value={correctOption}
               onChange={(e) => setCorrectOption(e.target.value)}
+              className={style.select}
             >
               <option value="">Select correct option</option>
               {options.map((option, index) => (
@@ -99,32 +107,44 @@ const Teacher = () => {
               ))}
             </select>
           </div>
-          <div>
-            <label>Poll duration (seconds):</label>
+          <div className={style.durationContainer}>
+            <label className={style.label}>Poll duration (seconds):</label>
             <input
+              className={style.duration}
               type="number"
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
             />
           </div>
-          <button onClick={handleSubmitPoll}>Submit poll</button>
+          <button className={style.SubmitPoll} onClick={handleSubmitPoll}>
+            Submit poll
+          </button>
           <PollResults />
         </div>
       )}
       {currentSection === "chat" && (
-        <Chat userName="Teacher" role="teacher" student={students} />
+        <Chat
+          socket={socket}
+          userName="Teacher"
+          role="teacher"
+          student={students}
+        />
       )}
+      {currentSection === "PollsHistory" && <Polls />}
+
       {currentSection === "students" && (
-        <div>
-          <h2>Active Students</h2>
-          <ul>
+        <div className={style.container}>
+          <h2 className={style.header}>Active Students</h2>
+          <ul className={style.studentList}>
             {students.map((student, index) => (
-              <li key={index}>
-                {student.name} {/* Display student name */}
-                <button onClick={() => handleKickStudent(student.name)}>
+              <li key={index} className={style.studentListItem}>
+                {student.name}
+                <button
+                  className={style.kickButton}
+                  onClick={() => handleKickStudent(student.name)}
+                >
                   Kick
-                </button>{" "}
-                {/* Pass student name to kick function */}
+                </button>
               </li>
             ))}
           </ul>

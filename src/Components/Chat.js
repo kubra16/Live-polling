@@ -1,43 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { io } from "socket.io-client";
-import styles from "./Chat.module.css"; // Import CSS module styles
+import styles from "./Chat.module.css";
 
-const socket = io("http://localhost:5000");
-
-const Chat = ({ userName, role }) => {
+const Chat = ({ socket, userName, role, student }) => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [onlineMembers, setOnlineMembers] = useState([]);
   const [selectedMember, setSelectedMember] = useState("");
 
   useEffect(() => {
-    console.log("Registering user:", userName, "with role:", role);
-    socket.emit("registerUser", userName, role);
-
-    socket.on("connect", () => {
-      console.log("Socket connected:", socket.id);
-    });
-
     socket.on("receiveMessage", (message) => {
       console.log("Received message:", message);
       setMessages((prevMessages) => [...prevMessages, message]);
     });
 
-    socket.on("updateOnlineUsers", (members) => {
-      console.log("Updated online users:", members);
-      const filteredMembers = members.filter(
-        (member) => member.name !== userName
-      );
-      setOnlineMembers(filteredMembers);
-    });
+    // Update the online members list
+    setOnlineMembers(student.filter((member) => member.name !== userName));
 
     // Cleanup on unmount
     return () => {
       console.log("Cleaning up listeners");
       socket.off("receiveMessage");
-      socket.off("updateOnlineUsers");
     };
-  }, [userName, role]);
+  }, [socket, userName, student]);
 
   const sendMessage = () => {
     if (message.trim() === "") return;
