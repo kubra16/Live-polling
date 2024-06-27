@@ -38,7 +38,7 @@ const Student = () => {
 
     socket.on("updateOnlineUsers", (onlineUsers) => {
       console.log("Online users updated:", onlineUsers);
-      setChat(onlineUsers); // Update online users
+      setChat(onlineUsers);
     });
 
     socket.on("updateResults", (resultsData) => {
@@ -86,7 +86,7 @@ const Student = () => {
         studentId: userName,
         answer: selectedAnswers[0],
       });
-      setHasAnswered(true);
+      setHasAnswered(true); // Update hasAnswered state
     }
   };
 
@@ -104,7 +104,6 @@ const Student = () => {
       <div className={styles.studentContainer}>
         {currentSection === "polls" && (
           <div>
-            <h1 className={styles.header}>Student</h1>
             {waiting && (
               <div className={styles.waitingMessage}>
                 <h2>Waiting for the poll to start...</h2>
@@ -137,7 +136,7 @@ const Student = () => {
                 </div>
               </div>
             )}
-            {!waiting && (hasAnswered || timer === 0) && <PollResults />}
+            {!waiting && hasAnswered && <PollResults />}
           </div>
         )}
         {currentSection === "chat" && (

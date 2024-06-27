@@ -13,6 +13,7 @@ const PollsHistory = () => {
       try {
         const response = await axios.get(`${BASE_URL}/previous-polls`);
         setPreviousPolls(response.data);
+        console.log(previousPolls);
       } catch (error) {
         console.error("Error fetching previous polls:", error);
       }
@@ -25,7 +26,7 @@ const PollsHistory = () => {
     <div className={styles.pollsContainer}>
       <h2>Previous Polls</h2>
       <ul className={styles.pollsList}>
-        {previousPolls.map((poll) => (
+        {previousPolls?.map((poll) => (
           <li key={poll._id} className={styles.pollLitem}>
             <h3>{poll.question}</h3>
             <ul className={styles.optionsList}>
