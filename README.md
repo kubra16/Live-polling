@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+# Live Polling
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Live polling is a dynamic method of gathering instant feedback or opinions from participants in real-time during an event, class, or meeting. It allows users to submit responses to questions or prompts immediately, providing instant insights and engagement.
 
-## Available Scripts
+## Technologies Used
 
-In the project directory, you can run:
+- Node.js
+- Express.js
+- MongoDB (with Mongoose)
+- Socket.IO
+- CORS
 
-### `npm start`
+## Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Before running this application, ensure you have the following installed:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Node.js (v12 or higher)
+- MongoDB (running locally or accessible MongoDB URI)
+- npm or yarn (package managers)
 
-### `npm test`
+## Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Follow these steps to run the backend application locally:
 
-### `npm run build`
+# Backend setup
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Clone the repository for backend**:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   ```bash
+   git clone https://github.com/kubra16/live-polling-server.git
+   cd live-polling-server
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. **install dependencies**:
 
-### `npm run eject`
+```bash
+   npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. **Setup environment variables** :
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   - Create a .env file in the root directory and paste your credentials.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+    MONGO_URL:<your_mobo_url>
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+4. **Start the server** :
 
-## Learn More
+```
+    npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- server will run on http://localhost:5000
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Frontend setup :
 
-### Code Splitting
+1. **clone the frontend respository**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+ git clone https://github.com/kubra16/Live-polling.git
+ cd Live-polling
+```
 
-### Analyzing the Bundle Size
+2. **install dependencies**:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+   npm install
+```
 
-### Making a Progressive Web App
+3. **Setup environment vaiables**:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Create a .env file in the root directory and paste your credentials.
 
-### Advanced Configuration
+```bash
+ REACT_APP_API_URL=http://localhost:5000
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+4. **Start the React app** :
 
-### Deployment
+```
+    npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- App will run on http://localhost:3000
