@@ -42,7 +42,7 @@ Follow these steps to run the backend application locally:
    - Create a .env file in the root directory and paste your credentials.
 
 ```bash
-    MONGO_URL:<your_mobo_url>
+    MONGO_URL:<your_mongo_url>
 ```
 
 4. **Start the server** :
@@ -70,7 +70,7 @@ Follow these steps to run the backend application locally:
 
 3. **Setup environment vaiables**:
 
-- Create a .env file in the root directory and paste your credentials.
+- Create a .env file in the root directory and paste this command.
 
 ```bash
  REACT_APP_API_URL=http://localhost:5000
