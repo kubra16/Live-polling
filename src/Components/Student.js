@@ -6,8 +6,9 @@ import PollResults from "./pollResults";
 import StudentNavbar from "./StudentNavbar";
 import Chat from "./Chat";
 import styles from "./Student.module.css"; // Import CSS module
+import Polls from "./Polls";
 
-const socket = io("http://localhost:5000");
+const socket = io(process.env.REACT_APP_API_URL);
 
 const Student = () => {
   const [selectedAnswers, setSelectedAnswers] = useState([]);
@@ -147,6 +148,7 @@ const Student = () => {
             student={chat}
           />
         )}
+        {currentSection === "PollsHistory" && <Polls />}
       </div>
     </div>
   );

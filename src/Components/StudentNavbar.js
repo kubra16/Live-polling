@@ -27,6 +27,14 @@ const StudentNavbar = ({ setCurrentSection }) => {
         >
           Chat
         </div>
+        <div
+          className={`${styles.navItem} ${
+            activeSection === "PollsHistory" ? styles.active : ""
+          }`}
+          onClick={() => handleSectionClick("PollsHistory")}
+        >
+          Previous polls
+        </div>
       </div>
     </nav>
   );

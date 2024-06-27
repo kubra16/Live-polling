@@ -8,7 +8,7 @@ import Chat from "./Chat";
 import style from "./Teacher.module.css";
 import Polls from "./Polls";
 
-const socket = io("http://localhost:5000");
+const socket = io(process.env.REACT_APP_API_URL);
 
 const Teacher = () => {
   const [question, setQuestion] = useState("");
